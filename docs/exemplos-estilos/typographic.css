@@ -1,0 +1,10 @@
+/* 🔡 Typographic Design Pattern */
+.typo-hero {
+  font-family: 'Syne', sans-serif;
+  font-weight: 900;
+  font-size: 25vw;
+  line-height: 0.7;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  mix-blend-mode: difference;
+}

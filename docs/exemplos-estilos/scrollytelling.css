@@ -1,0 +1,29 @@
+/* 🎬 Scrollytelling & Interlocking Pattern */
+.interlocking-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Os itens começam espalhados e convergem no centro via GSAP */
+.interlocking-item {
+  position: absolute;
+  will-change: transform;
+}
+
+/* Profundidade com camadas de texto e imagem */
+.depth-layer--bg { z-index: 1; }
+.depth-layer--text { z-index: 2; mix-blend-mode: overlay; }
+.depth-layer--fg { z-index: 3; pointer-events: none; }
+
+/* Efeito de granulado (Noise Overlay) */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  background: url('noise.png'); /* Placeholder */
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 9999;
+}

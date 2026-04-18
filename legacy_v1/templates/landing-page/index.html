@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SaaS Landing Page — Premium Web Kit Template">
+  <title>YourSaaS — The future of [category]</title>
+  <link rel="stylesheet" href="../../src/css/design-tokens.css">
+  <link rel="stylesheet" href="../../src/css/components.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="grid-lines" aria-hidden="true"></div>
+  <div class="scroll-progress"></div>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav class="nav nav--transparent" id="mainNav">
+    <div class="container nav__inner">
+      <a href="/" class="nav__logo">Your<span class="text-accent">SaaS</span></a>
+      <ul class="nav__links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav__cta">
+        <a href="/login" class="btn btn-ghost btn-sm">Sign in</a>
+        <a href="/signup" class="btn btn-primary btn-sm" data-magnetic="0.2">Start free →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="lp-hero">
+    <div class="container">
+      <div class="lp-hero__badge" data-reveal="fade-up">
+        <span class="label label--accent">🚀 Now in public beta</span>
+      </div>
+
+      <h1 class="lp-hero__headline" data-reveal="text">
+        Ship faster.<br>
+        <span class="text-accent">Build better.</span><br>
+        Scale infinitely.
+      </h1>
+
+      <p class="lp-hero__sub text-muted" data-reveal="fade-up">
+        The all-in-one platform that replaces your messy stack.<br>
+        Join 12,000+ teams already building the future.
+      </p>
+
+      <div class="lp-hero__actions" data-reveal="fade-up">
+        <a href="/signup" class="btn btn-primary btn-lg btn-arrow" data-magnetic="0.3">
+          Start for free
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <a href="#demo" class="btn btn-ghost btn-lg">Watch demo ▶</a>
+      </div>
+
+      <!-- Hero image / mockup placeholder -->
+      <div class="lp-hero__mockup" data-reveal="clip" data-clip-direction="bottom">
+        <div class="mockup-frame">
+          <div class="mockup-bar">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="mockup-screen" style="min-height: 400px; background: var(--color-ink-muted); display: flex; align-items: center; justify-content: center;">
+            <span class="text-muted font-mono" style="font-size: 0.8rem;">YOUR PRODUCT SCREENSHOT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>window.SplitText = class { constructor(el) { this.lines = [el]; } };</script>
+  <script type="module">
+    import { initTextReveal } from '../../src/js/animations/text-reveal.js';
+    import { initFadeUp } from '../../src/js/animations/fade-up.js';
+    import { initClipReveal } from '../../src/js/animations/clip-path-reveal.js';
+    import { initMagneticHover } from '../../src/js/animations/magnetic-hover.js';
+
+    initTextReveal();
+    initFadeUp();
+    initClipReveal();
+    initMagneticHover();
+
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+    });
+  </script>
+</body>
+</html>

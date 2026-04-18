@@ -1,0 +1,77 @@
+/* ===================================
+   TEMA: MINIMALISMO
+   Menos é mais. Espaço e foco.
+   Inspiração: Swiss design, Apple
+   =================================== */
+
+[data-theme="minimalism"] {
+  --color-ink: #FFFFFF;
+  --color-ink-soft: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-accent: #000000;
+  --color-accent-secondary: #0066FF;
+  --color-text-primary: #111111;
+  --color-text-muted: #999999;
+  --color-border: #E5E5E5;
+
+  /* Tipografia precisa */
+  --font-display: 'Inter', 'Helvetica Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-weight-display: 300;  /* light para headers grandes */
+  --letter-spacing-display: -0.04em;
+
+  /* Espaçamento generoso */
+  --space-section: clamp(8rem, 20vh, 16rem);
+  --space-gutter: clamp(2rem, 8vw, 8rem);
+
+  /* Sem sombras, sem gradientes */
+  --card-shadow: none;
+  --radius-card: 0px;
+  --radius-pill: 0px;
+  --border-subtle: 1px solid var(--color-border);
+}
+
+[data-theme="minimalism"] .card {
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--color-border);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 2rem 0;
+}
+
+[data-theme="minimalism"] .card:hover {
+  border-top-color: #000;
+}
+
+[data-theme="minimalism"] .btn-primary {
+  background: #000;
+  border: 1px solid #000;
+  border-radius: 0;
+  color: #fff;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 1rem 2rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+[data-theme="minimalism"] .btn-primary:hover {
+  background: transparent;
+  color: #000;
+}
+
+/* Regras tipográficas rígidas */
+[data-theme="minimalism"] h1,
+[data-theme="minimalism"] h2,
+[data-theme="minimalism"] h3 {
+  font-weight: 300;
+  letter-spacing: -0.04em;
+}
+
+/* Grid lines suaves */
+[data-theme="minimalism"] .grid-lines {
+  background-image: linear-gradient(90deg, #E5E5E5 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%;
+}

@@ -1,0 +1,10 @@
+/* ✨ Minimalist Luxury Pattern */
+.minimal-luxury {
+  font-family: 'Syne', serif;
+  background-color: #F5F4F0;
+  color: #0A0A0B;
+  letter-spacing: -0.01em;
+  padding: 10vw;
+  line-height: 1.1;
+  text-transform: uppercase;
+}

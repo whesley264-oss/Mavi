@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Premium Web Kit</title>
+  <link rel="stylesheet" href="../../src/css/design-tokens.css">
+  <link rel="stylesheet" href="../../src/css/components.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <div class="auth-layout">
+    <div class="auth-visual" aria-hidden="true">
+      <div class="auth-visual__bg"></div>
+      <div class="auth-visual__content">
+        <a href="/" class="nav__logo" style="font-size: 1.5rem;">Premium<span class="text-accent">.</span></a>
+        <blockquote class="auth-quote">
+          <p>"The best investment we made was standardizing our design system. This kit did it in hours."</p>
+          <footer>
+            <strong>Alex Kim</strong>
+            <span class="text-muted">— CTO, Startup X</span>
+          </footer>
+        </blockquote>
+      </div>
+      <div class="auth-visual__glow"></div>
+    </div>
+
+    <div class="auth-form-panel">
+      <div class="auth-form-inner">
+        <div class="auth-tabs">
+          <button class="auth-tab auth-tab--active" data-tab="login">Sign in</button>
+          <button class="auth-tab" data-tab="register">Create account</button>
+        </div>
+
+        <form class="auth-form" id="loginForm">
+          <div class="honeypot-field" aria-hidden="true"><input type="text" name="_h" tabindex="-1"></div>
+          <h1 class="auth-title">Welcome back</h1>
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" name="email" required placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" name="password" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;" data-magnetic="0.2">Sign in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script type="module">
+    import { initMagneticHover } from '../../src/js/animations/magnetic-hover.js';
+    initMagneticHover();
+  </script>
+</body>
+</html>

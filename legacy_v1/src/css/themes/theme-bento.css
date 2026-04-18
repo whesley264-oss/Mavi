@@ -1,0 +1,60 @@
+/* ===================================
+   TEMA: BENTO GRID
+   Caixas encaixadas, assimétrico, moderno
+   Inspiração: Apple WWDC, Linear
+   =================================== */
+
+[data-theme="bento"] {
+  --color-ink: #0A0A0A;
+  --color-ink-soft: #111111;
+  --color-surface: #F5F5F5;
+  --color-surface-dark: #161616;
+  --color-accent: #6366F1;
+  --color-accent-secondary: #EC4899;
+  --color-text-primary: #0A0A0A;
+  --color-text-inverted: #FAFAFA;
+  --color-text-muted: #6B7280;
+
+  --radius-card: 20px;
+  --bento-gap: 12px;
+}
+
+/* Grid bento */
+[data-theme="bento"] .bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--bento-gap);
+}
+
+/* Variações de tamanho de células */
+[data-theme="bento"] .bento-1x1 { grid-column: span 3; grid-row: span 1; }
+[data-theme="bento"] .bento-2x1 { grid-column: span 6; grid-row: span 1; }
+[data-theme="bento"] .bento-3x1 { grid-column: span 9; grid-row: span 1; }
+[data-theme="bento"] .bento-4x1 { grid-column: span 12; grid-row: span 1; }
+[data-theme="bento"] .bento-1x2 { grid-column: span 3; grid-row: span 2; }
+[data-theme="bento"] .bento-2x2 { grid-column: span 6; grid-row: span 2; }
+[data-theme="bento"] .bento-3x2 { grid-column: span 9; grid-row: span 2; }
+
+/* Células com cores alternadas */
+[data-theme="bento"] .bento-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  overflow: hidden;
+  min-height: 160px;
+}
+
+[data-theme="bento"] .bento-card--dark {
+  background: var(--color-surface-dark);
+  color: var(--color-text-inverted);
+}
+
+[data-theme="bento"] .bento-card--accent {
+  background: var(--color-accent);
+  color: white;
+}
+
+[data-theme="bento"] .bento-card--gradient {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-secondary));
+  color: white;
+}

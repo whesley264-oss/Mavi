@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Argus UI/UX — O Cérebro da Skill</title>
+
+  <!-- Base CSS -->
+  <link rel="stylesheet" href="./src/css/design-tokens.css">
+  <link rel="stylesheet" href="./src/css/components.css">
+
+  <!-- Themes -->
+  <link rel="stylesheet" href="./src/css/themes/theme-glassmorphism.css">
+  <link rel="stylesheet" href="./src/css/themes/theme-neobrutalism.css">
+  <link rel="stylesheet" href="./src/css/themes/theme-claymorphism.css">
+  <link rel="stylesheet" href="./src/css/themes/theme-minimalism.css">
+  <link rel="stylesheet" href="./src/css/themes/theme-aurora.css">
+  <link rel="stylesheet" href="./src/css/themes/theme-cyberpunk.css">
+  <link rel="stylesheet" href="./src/css/themes/theme-liquid-glass.css">
+  <link rel="stylesheet" href="./src/css/themes/theme-neumorphism.css">
+  <link rel="stylesheet" href="./src/css/themes/theme-bento.css">
+  <link rel="stylesheet" href="./src/css/themes/theme-typographic.css">
+  <link rel="stylesheet" href="./src/css/themes/theme-skeuomorphism.css">
+
+  <style>
+    .demo-section { padding: var(--space-section) 0; border-bottom: 1px solid var(--color-ink-border); }
+    .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-xl); margin-top: var(--space-2xl); }
+    .hero-demo { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .theme-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--color-ink-border);
+      background: var(--color-ink-muted);
+      color: white;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      transition: all 0.2s;
+    }
+    .theme-btn:hover, .theme-btn.active { background: var(--color-accent); color: var(--color-ink); border-color: var(--color-accent); }
+    #theme-preview { transition: all 0.5s ease-in-out; position: relative; overflow: hidden; }
+  </style>
+</head>
+<body>
+  <div class="grid-lines" aria-hidden="true"></div>
+  <div class="scroll-progress"></div>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <section class="hero-demo diagonal-slash">
+    <div class="container">
+      <span class="label label--accent" data-reveal="fade-up">A Skill de Elite para IAs</span>
+      <h1 class="hero-text" data-reveal="text">Argus UI/UX</h1>
+      <p class="text-muted" style="max-width: 700px; margin: var(--space-md) auto;" data-reveal="fade-up">
+        Este repositório é um **Protocolo de Consciência Técnica**. Ao ser ingerido, ele transforma qualquer IA em um desenvolvedor sênior focado em Design Premium e Segurança Blindada.
+      </p>
+      <div style="margin-top: var(--space-xl); display: flex; gap: 1rem; justify-content: center;" data-reveal="fade-up">
+        <a href="#themes" class="btn btn-primary btn-lg">Galeria de Temas</a>
+        <a href="./templates/landing-page/" class="btn btn-outline btn-lg">Ver Demo LP</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA DE TEMAS VISUAIS -->
+  <section class="demo-section" id="themes">
+    <div class="container">
+      <p class="label" data-reveal="fade-up">Design System</p>
+      <h2 data-reveal="text">11 estilos.<br>Zero compromisso.</h2>
+      <p class="text-muted" data-reveal="fade-up" style="margin-top: 1rem; max-width: 50ch;">
+        Aplique qualquer tema com um atributo HTML. Combine, misture, evolua. Clique nos botões abaixo para ver a mágica.
+      </p>
+
+      <div class="theme-switcher" style="margin-top: var(--space-xl);">
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;">
+          <button onclick="setTheme('default')"      class="theme-btn active">Default Dark</button>
+          <button onclick="setTheme('glassmorphism')" class="theme-btn">Glass</button>
+          <button onclick="setTheme('neobrutalism')"  class="theme-btn">Brutal</button>
+          <button onclick="setTheme('claymorphism')"  class="theme-btn">Clay</button>
+          <button onclick="setTheme('minimalism')"    class="theme-btn">Minimal</button>
+          <button onclick="setTheme('aurora')"        class="theme-btn">Aurora</button>
+          <button onclick="setTheme('cyberpunk')"     class="theme-btn">Cyber</button>
+          <button onclick="setTheme('neumorphism')"   class="theme-btn">Neu</button>
+          <button onclick="setTheme('liquid-glass')"  class="theme-btn">Liquid</button>
+          <button onclick="setTheme('bento')"         class="theme-btn">Bento</button>
+          <button onclick="setTheme('typographic')"   class="theme-btn">Type</button>
+          <button onclick="setTheme('skeuomorphism')" class="theme-btn">Skeuo</button>
+        </div>
+
+        <div id="theme-preview" style="padding: 4rem 2rem; border-radius: var(--radius-card); border: 1px solid var(--color-ink-border); background: var(--color-ink-soft);">
+          <div class="container">
+            <h3 class="display">Título de Exemplo</h3>
+            <p class="text-muted" style="margin: 1.5rem 0; max-width: 60ch;">
+              Este preview demonstra como os tokens de cor, sombras, bordas e tipografia se adaptam instantaneamente ao tema selecionado.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn btn-primary">Botão Primário</button>
+              <button class="btn btn-outline">Botão Outline</button>
+            </div>
+            <div class="demo-grid" style="margin-top: 3rem;">
+              <div class="card" data-tilt><h4>Componente A</h4><p class="text-muted">Cards herdam a elevação do tema.</p></div>
+              <div class="card" data-tilt><h4>Componente B</h4><p class="text-muted">Bordas e filtros são dinâmicos.</p></div>
+              <div class="card" data-tilt><h4>Componente C</h4><p class="text-muted">Tipografia editorial aplicada.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" style="padding: var(--space-xl) 0; text-align: center;">
+    <div class="container">
+      <p class="text-muted" style="font-size: var(--text-small);">© 2025 Argus UI/UX. Crafted with care for the AI generation.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>window.SplitText = class { constructor(el) { this.lines = [el]; } };</script>
+
+  <script>
+    function setTheme(theme) {
+      const preview = document.getElementById('theme-preview');
+      preview.setAttribute('data-theme', theme === 'default' ? '' : theme);
+
+      // Update active button
+      document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
+
+  <script type="module">
+    import { initTextReveal } from './src/js/animations/text-reveal.js';
+    import { initFadeUp } from './src/js/animations/fade-up.js';
+    import { initMagneticHover } from './src/js/animations/magnetic-hover.js';
+    import { initSpotlight } from './src/js/animations/spotlight.js';
+    import { initTiltCards } from './src/js/animations/tilt-card.js';
+
+    initTextReveal();
+    initFadeUp();
+    initMagneticHover();
+    initSpotlight();
+    initTiltCards();
+  </script>
+</body>
+</html>

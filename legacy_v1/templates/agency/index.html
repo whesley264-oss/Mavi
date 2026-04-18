@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agency — Argus UI/UX</title>
+  <link rel="stylesheet" href="../../src/css/design-tokens.css">
+  <link rel="stylesheet" href="../../src/css/components.css">
+  <style>
+    .agency-hero { height: 90vh; display: flex; align-items: center; }
+    .agency-hero h1 { font-size: 12vw; line-height: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="grid-lines" aria-hidden="true"></div>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <section class="agency-hero container">
+    <h1 data-reveal="text">We build<br>the <span class="text-accent">future</span>.</h1>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>window.SplitText = class { constructor(el) { this.lines = [el]; } };</script>
+  <script type="module">
+    import { initTextReveal } from '../../src/js/animations/text-reveal.js';
+    initTextReveal();
+  </script>
+</body>
+</html>

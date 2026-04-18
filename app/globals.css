@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-accent: #C8FF00;
+}
+
+body {
+  background: #0A0A0B;
+  color: #FAFAF8;
+  overflow-x: hidden;
+}
+
+@layer base {
+  h1, h2, h3, h4 {
+    @apply font-display font-bold;
+  }
+}
+
+/* Custom Scroll smoothing fallback if Lenis not active */
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Your Name</title>
+  <link rel="stylesheet" href="../../src/css/design-tokens.css">
+  <link rel="stylesheet" href="../../src/css/components.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="grid-lines" aria-hidden="true"></div>
+  <div class="scroll-progress"></div>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="/" class="nav__logo" style="font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.1em;">
+        YOUR<span class="text-accent">.</span>NAME
+      </a>
+      <ul class="nav__links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span class="label label--accent" style="font-size: 0.65rem;">Available</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO EDITORIAL -->
+  <section class="portfolio-hero">
+    <div class="container">
+      <div class="portfolio-hero__intro" data-reveal="fade-up">
+        <span class="font-mono text-muted" style="font-size: var(--text-small);">01 — Introduction</span>
+      </div>
+      <h1 class="portfolio-hero__name" data-reveal="text">
+        Creative<br>
+        Developer<br>
+        <em>&amp; Designer</em>
+      </h1>
+      <div class="portfolio-hero__meta" data-reveal="fade-up">
+        <p class="text-muted">Based in São Paulo, Brazil</p>
+        <p class="text-muted">Crafting digital experiences since 2018</p>
+      </div>
+    </div>
+    <div class="portfolio-hero__line diagonal-slash"></div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>window.SplitText = class { constructor(el) { this.lines = [el]; } };</script>
+  <script type="module">
+    import { initTextReveal } from '../../src/js/animations/text-reveal.js';
+    import { initFadeUp } from '../../src/js/animations/fade-up.js';
+    import { initMagneticHover } from '../../src/js/animations/magnetic-hover.js';
+
+    initTextReveal();
+    initFadeUp();
+    initMagneticHover();
+  </script>
+</body>
+</html>

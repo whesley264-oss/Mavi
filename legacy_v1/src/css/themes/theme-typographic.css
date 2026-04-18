@@ -1,0 +1,78 @@
+/* ===================================
+   TEMA: TYPOGRAPHIC
+   A fonte é a estrela. Sem imagens.
+   Inspiração: Pentagram, editorial sites
+   =================================== */
+
+[data-theme="typographic"] {
+  --color-ink: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-accent: #000000;
+  --color-accent-secondary: #FF3800;  /* laranja editorial */
+  --color-text-primary: #000000;
+  --color-text-muted: #888888;
+  --color-rule: #000000;
+
+  /* Tipografia como design */
+  --font-display: 'Syne', 'Times New Roman', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-editorial: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Tamanhos exagerados propositalmente */
+  --text-hero: clamp(5rem, 18vw, 18rem);
+  --text-h1: clamp(3rem, 10vw, 10rem);
+
+  /* Sem decoração — apenas tipografia */
+  --card-bg: transparent;
+  --card-border: none;
+  --card-shadow: none;
+  --radius-card: 0px;
+}
+
+/* Regras horizontais como design element */
+[data-theme="typographic"] .section-divider {
+  border: none;
+  border-top: 1px solid var(--color-rule);
+  margin: 0;
+}
+
+[data-theme="typographic"] .card {
+  background: transparent;
+  border: none;
+  border-top: 1px solid #000;
+  border-radius: 0;
+  padding: 2rem 0;
+}
+
+/* Números de seção grandes */
+[data-theme="typographic"] .section-number {
+  font-size: clamp(6rem, 15vw, 15rem);
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.05);
+  line-height: 1;
+  position: absolute;
+  top: -2rem;
+  left: 0;
+  font-family: var(--font-display);
+  pointer-events: none;
+  user-select: none;
+}
+
+[data-theme="typographic"] .btn-primary {
+  background: #000;
+  border: none;
+  color: #fff;
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  transition: background 0.2s;
+}
+
+[data-theme="typographic"] .btn-primary:hover {
+  background: var(--color-accent-secondary);
+}
