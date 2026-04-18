@@ -3,22 +3,57 @@
 @tailwind utilities;
 
 :root {
-  --color-accent: #C8FF00;
-}
-
-body {
-  background: #0A0A0B;
-  color: #FAFAF8;
-  overflow-x: hidden;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
 }
 
 @layer base {
-  h1, h2, h3, h4 {
-    @apply font-display font-bold;
+  body {
+    @apply bg-black text-white antialiased overflow-x-hidden;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
   }
 }
 
-/* Custom Scroll smoothing fallback if Lenis not active */
-html {
-  scroll-behavior: smooth;
+/* Custom Selection */
+::selection {
+  background: #FF00E6;
+  color: white;
+}
+
+/* Scrollbar Hide */
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Typography Scales */
+.text-display {
+  font-family: 'Syne', sans-serif;
+  font-weight: 900;
+}
+
+/* Smooth Scrolling context */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }

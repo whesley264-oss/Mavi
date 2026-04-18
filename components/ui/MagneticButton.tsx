@@ -1,6 +1,7 @@
 "use client";
-import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
+
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useSpring, useMotionValue, useMotionTemplate } from "framer-motion";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -8,59 +9,65 @@ interface MagneticButtonProps {
   variant?: "primary" | "secondary";
 }
 
-export const MagneticButton = ({ children, className = "", variant = "primary" }: MagneticButtonProps) => {
+export const MagneticButton = ({ children, className, variant = "primary" }: MagneticButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 20, stiffness: 300 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
+  const springConfig = { damping: 15, stiffness: 150 };
+  const springX = useSpring(mouseX, springConfig);
+  const springY = useSpring(mouseY, springConfig);
 
-  const handleMouse = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current!.getBoundingClientRect();
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
 
-    // Magnetic Logic
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.4, y: middleY * 0.4 });
-
-    // Spotlight Logic
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
+    mouseX.set((e.clientX - centerX) * 0.4);
+    mouseY.set((e.clientY - centerY) * 0.4);
   };
 
-  const reset = () => {
-    setPosition({ x: 0, y: 0 });
+  const handleMouseLeave = () => {
     mouseX.set(0);
     mouseY.set(0);
   };
 
-  const background = useMotionTemplate`radial-gradient(120px circle at ${smoothX}px ${smoothY}px, rgba(255, 255, 255, 0.15), transparent 80%)`;
+  const gradientX = useMotionValue(0);
+  const gradientY = useMotionValue(0);
+  const background = useMotionTemplate`radial-gradient(circle at ${gradientX}px ${gradientY}px, rgba(255,0,230,0.15), transparent 80%)`;
 
-  const baseStyles = "relative flex items-center justify-center px-10 py-4 font-bold transition-all duration-300 rounded-full overflow-hidden";
-  const variants = {
-    primary: "bg-white text-black hover:scale-105",
-    secondary: "bg-transparent border border-white/20 text-white hover:bg-white/10",
+  const handleGradientMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const { left, top } = ref.current.getBoundingClientRect();
+    gradientX.set(e.clientX - left);
+    gradientY.set(e.clientY - top);
   };
 
   return (
     <motion.button
       ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={reset}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
+      style={{ x: springX, y: springY }}
+      onMouseMove={(e) => {
+        handleMouseMove(e);
+        handleGradientMove(e);
+      }}
+      onMouseLeave={handleMouseLeave}
+      className={`
+        relative px-8 py-4 rounded-full font-black uppercase italic tracking-widest text-sm
+        transition-colors overflow-hidden group
+        ${variant === "primary" ? "bg-white text-black hover:bg-[#FF00E6] hover:text-white" : "border border-white/10 text-white hover:border-[#FF00E6]"}
+        ${className}
+      `}
     >
       <motion.div
-        className="pointer-events-none absolute inset-0 z-0"
+        className="absolute inset-0 pointer-events-none"
         style={{ background }}
       />
-      <span className="relative z-10">{children}</span>
+      <span className="relative z-10 flex items-center gap-2">
+        {children}
+      </span>
     </motion.button>
   );
 };
