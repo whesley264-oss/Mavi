@@ -1,6 +1,6 @@
 "use client"
-import { motion } from "framer-motion"
-import { useEffect } from "react"
+import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion"
+import { useEffect, useState } from "react"
 import Lenis from "lenis"
 import { RevealText } from "@/components/ui/RevealText"
 import { MagneticButton } from "@/components/ui/MagneticButton"
@@ -8,10 +8,21 @@ import { BentoCard } from "@/components/ui/BentoCard"
 import { NoiseOverlay } from "@/components/ui/NoiseOverlay"
 import { InterlockingCards } from "@/components/ui/InterlockingCards"
 import { DepthText } from "@/components/ui/DepthText"
-import { CursorReveal } from "@/components/ui/CursorReveal"
-import { Shield, Zap, Layout, Terminal, Cpu, Eye, ExternalLink } from "lucide-react"
+import { Shield, Zap, Layout, Terminal, Cpu, Eye, ExternalLink, Heart } from "lucide-react"
+import Image from "next/image"
 
 export default function Showcase() {
+  const [isHovered, setIsHovered] = useState(false)
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const radius = useMotionValue(0)
+
+  const springX = useSpring(mouseX, { stiffness: 300, damping: 30 })
+  const springY = useSpring(mouseY, { stiffness: 300, damping: 30 })
+  const springRadius = useSpring(radius, { stiffness: 300, damping: 30 })
+
+  const clipPath = useMotionTemplate`circle(${springRadius}px at ${springX}px ${springY}px)`
+
   useEffect(() => {
     const lenis = new Lenis()
     function raf(time: number) {
@@ -20,6 +31,16 @@ export default function Showcase() {
     }
     requestAnimationFrame(raf)
   }, [])
+
+  useEffect(() => {
+    radius.set(isHovered ? 150 : 0)
+  }, [isHovered, radius])
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    mouseX.set(e.clientX - rect.left)
+    mouseY.set(e.clientY - rect.top)
+  }
 
   return (
     <main className="relative min-h-screen bg-[#0A0A0B] selection:bg-[#C8FF00] selection:text-black">
@@ -45,18 +66,52 @@ export default function Showcase() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-xs font-mono tracking-widest text-[#C8FF00] border border-[#C8FF00]/20 rounded-full bg-[#C8FF00]/5"
+            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-xs font-mono tracking-widest text-[#C8FF00] border border-[#C8FF00]/20 rounded-full bg-[#C8FF00]/5"
           >
-            SOVEREIGN AI DEVELOPMENT STANDARD
+            A MAIS MAIS TEM NOME
           </motion.div>
+
+          <div
+            className="relative cursor-none mb-8 py-4"
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <h1 className="text-[15vw] leading-[0.8] font-black uppercase tracking-tighter text-white/10 select-none">
+              MAVI
+            </h1>
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              style={{
+                clipPath: clipPath,
+                WebkitClipPath: clipPath
+              }}
+            >
+              <h1 className="text-[15vw] leading-[0.8] font-black uppercase tracking-tighter text-[#C8FF00] select-none">
+                MAVI
+              </h1>
+            </motion.div>
+
+            {/* Custom Cursor Dot for the Name Area */}
+            <motion.div
+              className="absolute top-0 left-0 w-8 h-8 bg-[#C8FF00] rounded-full z-[100] pointer-events-none mix-blend-difference blur-sm"
+              style={{
+                x: springX,
+                y: springY,
+                translateX: "-50%",
+                translateY: "-50%",
+                opacity: isHovered ? 1 : 0
+              }}
+            />
+          </div>
 
           <RevealText
             text="ENGENHARIA DE"
-            className="text-[12vw] leading-[0.8] font-black uppercase tracking-tighter mb-4"
+            className="text-[8vw] leading-[0.8] font-black uppercase tracking-tighter mb-4"
           />
           <RevealText
             text="IMPACTO EXTREMO"
-            className="text-[12vw] leading-[0.8] font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20"
+            className="text-[8vw] leading-[0.8] font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20"
           />
 
           <div className="flex gap-4 justify-center mt-12">
@@ -109,6 +164,16 @@ export default function Showcase() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <BentoCard title="A MAIS MAIS" desc="Visual de Elite Mavi." className="md:col-span-2 relative h-96 overflow-hidden">
+               <Image
+                src="/mavi-1.jpg"
+                alt="Mavi 1"
+                fill
+                className="object-cover opacity-50 group-hover:opacity-80 transition-opacity duration-700"
+               />
+               <Heart className="absolute bottom-6 right-6 text-[#C8FF00]" size={40} />
+            </BentoCard>
+
             <BentoCard title="Neo-Brutalism" desc="Ousadia Visceral." className="bg-[#FFE600] text-black border-black border-4 shadow-[12px_12px_0px_#000]">
                <Terminal className="absolute bottom-6 right-6 opacity-20" size={80} />
             </BentoCard>
@@ -117,17 +182,19 @@ export default function Showcase() {
                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-blue-500/30 rounded-full blur-[80px] animate-pulse" />
             </BentoCard>
 
+            <BentoCard title="Sovereign Style" desc="Mavi — A Mestra." className="relative h-96 overflow-hidden">
+               <Image
+                src="/mavi-2.jpg"
+                alt="Mavi 2"
+                fill
+                className="object-cover opacity-40 group-hover:opacity-70 transition-opacity duration-700"
+               />
+               <Zap className="absolute bottom-6 right-6 text-[#C8FF00]" size={40} />
+            </BentoCard>
+
             <BentoCard title="Cyber Tech X" desc="Protocolo hacker supremo." className="bg-[#05000F] border-cyan-500/30 shadow-[0_0_30px_rgba(0,255,255,0.1)]">
                <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.02)_1px,transparent_1px)] bg-[size:15px_15px]" />
                <Cpu className="absolute bottom-6 right-6 text-cyan-400 opacity-50" size={50} />
-            </BentoCard>
-
-            <BentoCard title="Skeuo Elite" desc="Toque físico industrial." className="bg-neutral-100 text-black shadow-[inset_0_4px_20px_rgba(0,0,0,0.15),0_20px_40px_rgba(0,0,0,0.1)] border-white border-2">
-               <div className="mt-12 flex gap-4">
-                 {[1,2,3].map(i => (
-                   <div key={i} className="w-16 h-16 rounded-2xl bg-neutral-200 shadow-[inset_0_2px_4px_rgba(255,255,255,0.5),0_5px_10px_rgba(0,0,0,0.1)] border border-white" />
-                 ))}
-               </div>
             </BentoCard>
 
             <BentoCard title="Advanced Bento" desc="Modular Editorial." className="md:col-span-2 bg-neutral-900 border-white/5">
@@ -143,7 +210,7 @@ export default function Showcase() {
       </section>
 
       <footer className="py-20 border-t border-white/5 text-center bg-black">
-         <RevealText text="ARGUS UI/UX" className="text-4xl font-black mb-4 tracking-tighter" />
+         <RevealText text="MAVI x ARGUS" className="text-4xl font-black mb-4 tracking-tighter" />
          <p className="text-white/20 font-mono text-[10px] uppercase tracking-[0.5em]">The Sovereign AI Development Standard — v3.1</p>
       </footer>
     </main>
