@@ -1,6 +1,12 @@
- ⚠ Port 3000 is in use, trying 3001 instead.
- ⚠ Port 3001 is in use, trying 3002 instead.
-   ▲ Next.js 14.1.0
-   - Local:        http://localhost:3002
 
- ✓ Ready in 1931ms
+> argus-ui-ux-master@2.0.0 dev
+> next dev
+
+   ▲ Next.js 14.1.0
+   - Local:        http://localhost:3000
+
+ ✓ Ready in 1948ms
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 967ms (64 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 9.9s (1176 modules)
