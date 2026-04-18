@@ -1,0 +1,179 @@
+<form class="contact-form card" id="contactForm" novalidate>
+  <!-- 🛡️ Proteção: Honeypot (Intercepta bots) -->
+  <div class="honeypot-field" aria-hidden="true">
+    <label for="website_url">Não preencha este campo se for humano</label>
+    <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
+  </div>
+
+  <!-- 🛡️ Proteção: CSRF Token -->
+  <input type="hidden" name="_csrf" id="contactCsrf">
+
+  <div class="form-header" style="margin-bottom: var(--space-lg);">
+    <h3 class="h3">Envie uma proposta</h3>
+    <p class="text-muted" style="font-size: var(--text-small);">Responderemos em até 24 horas úteis.</p>
+  </div>
+
+  <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+    <div class="form-group">
+      <label for="name">Seu Nome *</label>
+      <input type="text" id="name" name="name" required
+             placeholder="Ex: João Silva"
+             pattern="^[a-zA-ZÀ-ÿ\s\-']{2,50}$"
+             aria-describedby="nameError">
+      <span class="field-error" id="nameError" role="alert"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Profissional *</label>
+      <input type="email" id="email" name="email" required
+             placeholder="joao@empresa.com"
+             aria-describedby="emailError">
+      <span class="field-error" id="emailError" role="alert"></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="subject">Assunto</label>
+    <select id="subject" name="subject">
+      <option value="projeto">Novo Projeto</option>
+      <option value="parceria">Parceria</option>
+      <option value="carreira">Trabalhe Conosco</option>
+      <option value="outro">Outro</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <label for="message">Mensagem *</label>
+      <span class="char-count" id="charCount">0 / 1000</span>
+    </div>
+    <textarea id="message" name="message" required rows="5"
+              placeholder="Descreva brevemente o seu desafio..."
+              maxlength="1000"
+              aria-describedby="messageError"></textarea>
+    <span class="field-error" id="messageError" role="alert"></span>
+  </div>
+
+  <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 1.2rem;" data-magnetic="0.2">
+    <span class="btn-text">Iniciar Conversa</span>
+    <span class="btn-loader" style="display: none; animation: spin 1s linear infinite;">⟳</span>
+  </button>
+
+  <div class="form-feedback" id="formFeedback" role="status" aria-live="polite"></div>
+
+  <style>
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</form>
+
+<script type="module">
+  import { sanitize, sanitizeEmail } from '../js/security/input-sanitizer.js';
+  import { injectCSRFToken, validateCSRFToken } from '../js/security/csrf-protection.js';
+  import { RateLimiter } from '../js/security/rate-limiter.js';
+
+  const form = document.getElementById('contactForm');
+  const messageArea = document.getElementById('message');
+  const charCount = document.getElementById('charCount');
+  const feedback = document.getElementById('formFeedback');
+
+  // 🛡️ Inicializa Rate Limiter (Max 3 envios por 15 min)
+  const limiter = new RateLimiter({ maxAttempts: 3, windowMs: 900000, blockMs: 900000 });
+
+  // 🛡️ Injeta Token CSRF
+  injectCSRFToken(form);
+
+  // Contador de caracteres em tempo real
+  messageArea.addEventListener('input', () => {
+    const length = messageArea.value.length;
+    charCount.textContent = `${length} / 1000`;
+    charCount.style.color = length > 900 ? '#FF4D4D' : 'var(--color-text-muted)';
+  });
+
+  // Validação em tempo real (blur)
+  form.querySelectorAll('input, textarea').forEach(field => {
+    field.addEventListener('blur', () => validateField(field));
+  });
+
+  function validateField(field) {
+    const errorEl = document.getElementById(`${field.id}Error`);
+    if (!errorEl) return true;
+
+    let errorMsg = '';
+    if (field.required && !field.value.trim()) {
+      errorMsg = 'Este campo é obrigatório.';
+    } else if (field.type === 'email' && field.value && !sanitizeEmail(field.value)) {
+      errorMsg = 'Por favor, insira um email válido.';
+    } else if (field.pattern && field.value && !new RegExp(field.pattern).test(field.value)) {
+      errorMsg = 'Formato inválido.';
+    }
+
+    errorEl.textContent = errorMsg;
+    field.setAttribute('aria-invalid', errorMsg ? 'true' : 'false');
+    return !errorMsg;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // 🛡️ Check Honeypot
+    if (form.querySelector('#website_url').value) {
+      console.warn('Bot detectado via Honeypot.');
+      return;
+    }
+
+    // 🛡️ Check Rate Limiter
+    const rl = limiter.isBlocked();
+    if (rl.blocked) {
+      showFeedback(`Muitas tentativas. Tente novamente em ${rl.remaining}s.`, 'error');
+      return;
+    }
+
+    // Validação Geral
+    let isValid = true;
+    form.querySelectorAll('input[required], textarea[required]').forEach(f => {
+      if (!validateField(f)) isValid = false;
+    });
+    if (!isValid) return;
+
+    // 🛡️ Valida CSRF
+    try {
+      validateCSRFToken(form.querySelector('[name="_csrf"]').value);
+    } catch (err) {
+      showFeedback('Erro de segurança. Por favor, recarregue a página.', 'error');
+      return;
+    }
+
+    // Simulação de envio
+    setLoading(true);
+    limiter.record();
+
+    try {
+      // Aqui entraria o fetch para sua API
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      showFeedback('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
+      form.reset();
+      charCount.textContent = '0 / 1000';
+    } catch (err) {
+      showFeedback('Erro ao enviar. Tente novamente mais tarde.', 'error');
+    } finally {
+      setLoading(false);
+    }
+  });
+
+  function setLoading(loading) {
+    const btn = form.querySelector('button[type=submit]');
+    btn.disabled = loading;
+    form.querySelector('.btn-text').style.opacity = loading ? '0' : '1';
+    form.querySelector('.btn-loader').style.display = loading ? 'inline-block' : 'none';
+  }
+
+  function showFeedback(msg, type) {
+    feedback.textContent = msg;
+    feedback.className = `form-feedback form-feedback--${type}`;
+    feedback.style.display = 'block';
+  }
+</script>

@@ -1,0 +1,15 @@
+<nav class="nav nav--transparent" id="transparentNav" style="position: fixed; top: 0; width: 100%; z-index: 1000; transition: background 0.3s;">
+  <div class="container nav__inner" style="height: 80px; display: flex; align-items: center; justify-content: space-between;">
+    <a href="/" class="nav__logo" style="color: white; text-decoration: none; font-weight: 800;">ARGUS</a>
+    <div class="nav__cta">
+      <button class="btn btn-primary btn-sm">Get Started</button>
+    </div>
+  </div>
+</nav>
+<script>
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('transparentNav');
+    nav.style.background = window.scrollY > 50 ? 'rgba(10,10,11,0.9)' : 'transparent';
+    nav.style.backdropFilter = window.scrollY > 50 ? 'blur(10px)' : 'none';
+  });
+</script>

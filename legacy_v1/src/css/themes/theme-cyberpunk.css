@@ -1,0 +1,104 @@
+/* ===================================
+   TEMA: CYBERPUNK / SYNTHWAVE
+   Neon, distópico, anos 80 futurista
+   Inspiração: Blade Runner, Tron
+   =================================== */
+
+[data-theme="cyberpunk"] {
+  --color-ink: #000000;
+  --color-ink-soft: #05000F;
+  --color-ink-muted: #0A001A;
+  --color-accent: #00FFFF;         /* cyan neon */
+  --color-accent-secondary: #FF00FF; /* magenta neon */
+  --color-accent-alt: #FFFF00;     /* yellow neon */
+  --color-text-primary: #E0E0FF;
+  --color-text-muted: rgba(224, 224, 255, 0.5);
+
+  /* Glow neon */
+  --neon-cyan: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 40px rgba(0,255,255,0.5);
+  --neon-magenta: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 40px rgba(255,0,255,0.5);
+  --neon-border-cyan: 1px solid rgba(0, 255, 255, 0.5);
+  --neon-border-magenta: 1px solid rgba(255, 0, 255, 0.4);
+
+  /* Grid perspectiva */
+  --grid-color: rgba(0, 255, 255, 0.08);
+
+  /* Fontes mono para tech feel */
+  --font-display: 'JetBrains Mono', 'Courier New', monospace;
+  --font-body: 'JetBrains Mono', monospace;
+
+  --radius-card: 2px; /* quase sem arredondamento */
+}
+
+/* Grid perspectiva no fundo */
+[data-theme="cyberpunk"] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="cyberpunk"] .card {
+  background: rgba(0, 255, 255, 0.03);
+  border: var(--neon-border-cyan);
+  border-radius: var(--radius-card);
+  box-shadow: var(--neon-cyan);
+  position: relative;
+  transition: box-shadow 0.3s;
+}
+
+[data-theme="cyberpunk"] .card:hover {
+  box-shadow: var(--neon-magenta);
+  border-color: rgba(255, 0, 255, 0.6);
+}
+
+/* Scanlines */
+[data-theme="cyberpunk"] .card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, 0.01) 2px,
+    rgba(0, 255, 255, 0.01) 4px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+[data-theme="cyberpunk"] .btn-primary {
+  background: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border-radius: 2px;
+  box-shadow: var(--neon-cyan), inset 0 0 15px rgba(0, 255, 255, 0.05);
+  transition: all 0.2s;
+}
+
+[data-theme="cyberpunk"] .btn-primary:hover {
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: var(--neon-cyan), inset 0 0 30px rgba(0, 255, 255, 0.1);
+}
+
+/* Glitch animation */
+@keyframes glitch {
+  0%, 100% { transform: none; clip-path: none; }
+  20% { transform: translate(-2px, 0); clip-path: inset(30% 0 50% 0); }
+  40% { transform: translate(2px, 0); clip-path: inset(60% 0 10% 0); }
+  60% { transform: translate(-1px, 0); clip-path: inset(10% 0 80% 0); }
+  80% { transform: none; clip-path: none; }
+}
+
+[data-theme="cyberpunk"] [data-glitch]:hover {
+  animation: glitch 0.4s steps(1) forwards;
+}

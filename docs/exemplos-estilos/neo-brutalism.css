@@ -1,0 +1,13 @@
+/* 🎨 Neo-Brutalism Pattern */
+.brutal-card {
+  background: #C8FF00; /* Acid Green */
+  border: 4px solid #000;
+  box-shadow: 10px 10px 0px #000;
+  border-radius: 0px;
+  padding: 2rem;
+  transition: transform 0.2s;
+}
+.brutal-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 14px 14px 0px #000;
+}

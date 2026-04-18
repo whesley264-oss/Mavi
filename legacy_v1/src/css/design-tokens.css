@@ -1,0 +1,86 @@
+/* AI INTENT: Core design system foundation. Defines the visual DNA of Argus UI/UX. */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ─── PALETA DARK LUXURY ─── */
+  --color-ink:          #0A0A0B;
+  --color-ink-soft:     #111113;
+  --color-ink-muted:    #1C1C20;
+  --color-ink-border:   #2A2A2F;
+  --color-surface:      #F5F4F0;
+  --color-surface-warm: #EAE8E0;
+  --color-accent:       #C8FF00;   /* verde ácido — assinatura visual */
+  --color-accent-warm:  #FF6B35;   /* laranja queimado — secundário */
+  --color-accent-blue:  #4D9EFF;   /* azul elétrico — terciário */
+  --color-text-primary: #FAFAF8;
+  --color-text-muted:   #8A8A8E;
+  --color-text-subtle:  #4A4A50;
+  --color-text-dark:    #0A0A0B;
+
+  /* ─── TIPOGRAFIA ─── */
+  --font-display: 'Syne', 'Clash Display', sans-serif;
+  --font-body:    'Inter', 'DM Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* ─── ESCALA FLUIDA ─── */
+  --text-hero:    clamp(4rem, 12vw, 12rem);
+  --text-display: clamp(3rem, 8vw, 8rem);
+  --text-h1:      clamp(2.5rem, 6vw, 6rem);
+  --text-h2:      clamp(1.8rem, 4vw, 4rem);
+  --text-h3:      clamp(1.4rem, 2.5vw, 2.5rem);
+  --text-h4:      clamp(1.1rem, 1.8vw, 1.5rem);
+  --text-body:    clamp(1rem, 1.5vw, 1.125rem);
+  --text-small:   clamp(0.8rem, 1.2vw, 0.9rem);
+  --text-label:   clamp(0.7rem, 1vw, 0.8rem);
+
+  /* ─── ESPAÇAMENTO ─── */
+  --space-2xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --space-xs:  clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm:  clamp(0.75rem, 1.5vw, 1rem);
+  --space-md:  clamp(1rem, 2vw, 1.5rem);
+  --space-lg:  clamp(1.5rem, 3vw, 2.5rem);
+  --space-xl:  clamp(2rem, 5vw, 4rem);
+  --space-2xl: clamp(3rem, 8vw, 7rem);
+  --space-section: clamp(6rem, 15vh, 12rem);
+  --space-gutter:  clamp(1.5rem, 5vw, 5rem);
+
+  /* ─── EFEITOS ─── */
+  --blur-glass:    blur(24px);
+  --blur-sm:       blur(8px);
+  --radius-sm:     8px;
+  --radius-card:   16px;
+  --radius-lg:     24px;
+  --radius-pill:   100px;
+  --radius-circle: 50%;
+
+  /* ─── SOMBRAS ─── */
+  --shadow-sm:    0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md:    0 8px 32px rgba(0,0,0,0.4);
+  --shadow-lg:    0 24px 64px rgba(0,0,0,0.5);
+  --shadow-glow:  0 0 40px rgba(200,255,0,0.15);
+  --shadow-warm:  0 0 40px rgba(255,107,53,0.15);
+
+  /* ─── TRANSIÇÕES ─── */
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:  cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast:   150ms;
+  --duration-base:   300ms;
+  --duration-slow:   600ms;
+  --duration-slower: 1000ms;
+
+  /* ─── GRID ─── */
+  --grid-cols: 12;
+  --grid-gap:  clamp(1rem, 2vw, 2rem);
+  --container: min(100% - var(--space-gutter) * 2, 1400px);
+}
+
+/* ─── MODO CLARO (opcional) ─── */
+[data-theme="light"] {
+  --color-ink:        #F5F4F0;
+  --color-ink-soft:   #EAE8E0;
+  --color-ink-muted:  #D5D3CB;
+  --color-surface:    #0A0A0B;
+  --color-text-primary: #0A0A0B;
+  --color-text-muted:   #4A4A50;
+}

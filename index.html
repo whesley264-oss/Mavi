@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARGUS UI/UX v3.1 — SUPREME PORTAL</title>
+  <link rel="stylesheet" href="./src/css/design-tokens.css">
+  <link rel="stylesheet" href="./src/css/components.css">
+  <style>
+    .portal-hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: #000; position: relative; overflow: hidden; }
+    .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; padding: 4rem 0; }
+    .portal-card { background: #111; border: 1px solid #222; padding: 2rem; border-radius: 24px; transition: all 0.3s; text-decoration: none; color: inherit; }
+    .portal-card:hover { border-color: var(--color-accent); transform: translateY(-10px); background: #161616; }
+    .glitch-portal { font-size: 15vw; font-weight: 900; line-height: 0.8; letter-spacing: -0.05em; color: white; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="grid-lines"></div>
+
+  <section class="portal-hero">
+    <div class="container">
+      <span class="label label--accent">Sovereign Master Skill</span>
+      <h1 class="glitch-portal">ARGUS</h1>
+      <p class="text-muted" style="max-width: 600px; margin: 2rem auto;">
+        O portal definitivo de engenharia visual. Ingerir este repositório transforma qualquer IA em um Arquiteto de Elite.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+        <a href="./app/page.tsx" class="btn btn-primary">Next.js Showcase (v3)</a>
+        <a href="#explore" class="btn btn-outline">Explorar Recursos</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="explore" class="container" style="padding: 10vh 0;">
+    <h2 class="display">BIBLIOTECA DE ELITE</h2>
+    <div class="portal-grid">
+      <a href="./demo_static.html" class="portal-card">
+        <span class="badge">Static</span>
+        <h3>Showcase v1.0</h3>
+        <p class="text-muted">A base clássica de componentes HTML/CSS.</p>
+      </a>
+      <a href="./docs/ESTILOS.md" class="portal-card">
+        <span class="badge">Design</span>
+        <h3>Atlas de Estilos</h3>
+        <p class="text-muted">11 pilares estéticos para fugir do genérico.</p>
+      </a>
+      <a href="./docs/PROTOCOL_IMMERSIVE.md" class="portal-card">
+        <span class="badge">Motion</span>
+        <h3>DNA Imersivo</h3>
+        <p class="text-muted">Engenharia de movimento baseada em física real.</p>
+      </a>
+      <a href="./templates/landing-page/index.html" class="portal-card">
+        <span class="badge">Template</span>
+        <h3>Landing Page SaaS</h3>
+        <p class="text-muted">O padrão ouro de conversão e estética.</p>
+      </a>
+      <a href="./security/VULNERABILITIES.md" class="portal-card">
+        <span class="badge">Security</span>
+        <h3>Manual Red Team</h3>
+        <p class="text-muted">Blindagem total contra 50 vulnerabilidades.</p>
+      </a>
+      <a href="./docs/PROMPTS.md" class="portal-card">
+        <span class="badge">AI Skill</span>
+        <h3>Prompts Mestres</h3>
+        <p class="text-muted">Atalhos para alta performance técnica.</p>
+      </a>
+    </div>
+  </section>
+
+  <footer class="container" style="padding: 4rem 0; text-align: center; border-top: 1px solid #222;">
+    <p class="text-muted">© 2025 ARGUS UI/UX — THE SOVEREIGN AI STANDARD</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script type="module">
+    gsap.from(".glitch-portal", { opacity: 0, y: 100, duration: 1.5, ease: "expo.out" });
+    gsap.from(".portal-card", {
+      opacity: 0,
+      y: 50,
+      stagger: 0.1,
+      scrollTrigger: { trigger: ".portal-grid", start: "top 80%" }
+    });
+  </script>
+</body>
+</html>

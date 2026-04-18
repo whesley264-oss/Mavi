@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Fullscreen — Premium Web Kit</title>
+  <link rel="stylesheet" href="../../src/css/design-tokens.css">
+  <link rel="stylesheet" href="../../src/css/components.css">
+  <style>
+    .hero-fs { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .hero-fs__headline { text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="grid-lines" aria-hidden="true"></div>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <section class="hero-fs diagonal-slash">
+    <div class="container">
+      <div class="hero-fs__label" style="text-align: center; margin-bottom: 2rem;">
+        <span class="label label--accent">Argus UI/UX</span>
+      </div>
+      <h1 class="hero-fs__headline hero-text" data-reveal="text">
+        We craft digital<br>experiences
+      </h1>
+      <div style="text-align: center; margin-top: 3rem;" data-reveal="fade-up">
+        <a href="#" class="btn btn-primary btn-lg btn-arrow" data-magnetic="0.3">
+          Ver Projetos
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>window.SplitText = class { constructor(el) { this.lines = [el]; } };</script>
+  <script type="module">
+    import { initTextReveal } from '../../src/js/animations/text-reveal.js';
+    import { initFadeUp } from '../../src/js/animations/fade-up.js';
+    import { initMagneticHover } from '../../src/js/animations/magnetic-hover.js';
+    initTextReveal();
+    initFadeUp();
+    initMagneticHover();
+  </script>
+</body>
+</html>
